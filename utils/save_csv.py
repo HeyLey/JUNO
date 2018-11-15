@@ -2,9 +2,6 @@ from utils.read_data import read_hits, read_pos, read_true_info
 import pandas as pd
 import tables
 
-spmt_nHits, spmt_pmtID, spmt_hitTime, spmt_isDN = read_hits(t2)
-spmt_nHits, spmt_pmtID, spmt_hitTime, spmt_isDN = read_hits(t2)
-
 def hits_to_csv(t, name):
     nHits, pmtID, hitTime, isDN = read_hits(t)
     df = pd.DataFrame({ 'nHits': nHits, 'pmtID': pmtID, 
