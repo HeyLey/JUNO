@@ -1,4 +1,4 @@
-from utils.save_csv import hits_to_csv, pos_to_csv, true_info_to_csv
+from utils.save import hits_to_hdf, pos_to_csv, true_info_to_csv
 
 def convert(t1, t2, t3, t4, t5):
     hits_to_hdf(t1, 'lpmt_hits.h5')
