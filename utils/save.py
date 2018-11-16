@@ -2,17 +2,23 @@ from utils.read_data import read_hits, read_pos, read_true_info
 import pandas as pd
 import tables
 
-def hits_to_csv(t, name):
+def hits_to_hdf(t, name):
     nHits, pmtID, hitTime, isDN = read_hits(t)
-    df = pd.DataFrame(columns=['nHits', 'pmtID', 'hitTime', 'isDN'], index=[0])
-    for i in range(0, 1):
+    
+    dt_list = []
+    for i in tqdm(range(len(nHits))):
         n = nHits[i]
-        for j in range(0, n):
-            df2 = pd.DataFrame({ 'nHits': n, 'pmtID': pmtID[i][j], 
-                                'hitTime': hitTime[i][j], 'isDN': isDN[i][j]
-                             })
-            df.append(df2)
-    df.to_csv(name, index=False)
+        
+        df2 = pd.DataFrame({
+            'event': i,
+            'pmtID': pmtID[i], 
+            'hitTime': hitTime[i], 
+            'isDN': isDN[i]
+                             
+        }) 
+        dt_list.append(df2)
+    
+    pd.concat(dt_list).to_hdf(name, index=False, key='df', mode='w')
 
 
 def pos_to_csv(t, name):
