@@ -1,6 +1,7 @@
 from utils.read_data import read_hits, read_pos, read_true_info
 import pandas as pd
 import tables
+from tqdm import tqdm
 
 def hits_to_hdf(t, name):
     nHits, pmtID, hitTime, isDN = read_hits(t)
